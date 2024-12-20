@@ -104,7 +104,7 @@ LinkedList *create_list()
 
 void reverse_list(LinkedList *list)
 {
-    // TODO
+    list = list;
 }
 
 void clear_list(LinkedList *list)
