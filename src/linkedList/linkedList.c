@@ -17,6 +17,10 @@ ListNode *create_node(void *data)
 
 void insert_head(LinkedList *list, void *data)
 {
+    if (list == NULL)
+    {
+        return;
+    }
     ListNode *new_node = create_node(data);
     new_node->next = list->head;
     list->head = new_node;
@@ -24,6 +28,10 @@ void insert_head(LinkedList *list, void *data)
 
 void insert_tail(LinkedList *list, void *data)
 {
+    if (list == NULL)
+    {
+        return;
+    }
     ListNode *new_node = create_node(data);
 
     if (list->head == NULL)
@@ -42,6 +50,10 @@ void insert_tail(LinkedList *list, void *data)
 
 void insert_node(LinkedList *list, void *data, int index)
 {
+    if (list == NULL)
+    {
+        return;
+    }
     if (index <= 0)
     {
         insert_head(list, data);
@@ -61,7 +73,7 @@ void insert_node(LinkedList *list, void *data, int index)
 
 void delete_node(LinkedList *list, void *data)
 {
-    if (list->head == NULL)
+    if (list == NULL || list->head == NULL)
     {
         return;
     }
@@ -104,11 +116,32 @@ LinkedList *create_list()
 
 void reverse_list(LinkedList *list)
 {
-    list = list;
+    if (list == NULL || list->head == NULL)
+    {
+        return;
+    }
+    ListNode *prev = NULL;
+    ListNode *current = list->head;
+    ListNode *next = NULL;
+
+    while (current)
+    {
+        next = current->next;
+        current->next = prev;
+        prev = current;
+        current = next;
+    }
+
+    list->head = prev;
 }
 
 void clear_list(LinkedList *list)
 {
+    if (list == NULL)
+    {
+        return;
+    }
+    
     ListNode *current = list->head;
     while (current!= NULL)
     {
