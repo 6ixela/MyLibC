@@ -111,3 +111,44 @@ Test(LinkedList, test_reverse_list) {
     clear_list(list);
     free(list);
 }
+
+Test(LinkedList, test_struct_data) {
+    LinkedList *list = create_list();
+    struct test_linkedList
+    {
+        int data;
+        float distance;
+        char name[10];
+    };
+    
+    struct test_linkedList data1 = {1, 1.5, "one"};
+    struct test_linkedList data2 = {2, 2.5, "two"};
+    struct test_linkedList data3 = {3, 3.5, "three"};
+
+    insert_tail(list, &data1);
+    insert_tail(list, &data2);
+    insert_tail(list, &data3);
+
+    reverse_list(list);
+
+    ListNode *l = list->head;
+
+    struct test_linkedList *head = l->data;
+    cr_assert_eq(head->data, data3.data, "The reversed list head should have data 3.");
+    cr_assert_eq(head->distance, data3.distance, "The reversed list head should have distance 3.5.");
+    cr_assert_str_eq(head->name, data3.name, "The reversed list head should have name 'three'.");
+
+    l = l->next;
+    head = l->data;
+    cr_assert_eq(head->data, data2.data, "The reversed list head should have data 3.");
+    cr_assert_eq(head->distance, data2.distance, "The reversed list head should have distance 3.5.");
+    cr_assert_str_eq(head->name, data2.name, "The reversed list head should have name 'three'.");
+
+    l = l->next;
+    head = l->data;
+    cr_assert_eq(head->data, data1.data, "The reversed list head should have data 3.");
+    cr_assert_eq(head->distance, data1.distance, "The reversed list head should have distance 3.5.");
+    cr_assert_str_eq(head->name, data1.name, "The reversed list head should have name 'three'.");
+    clear_list(list);
+    free(list);
+}
