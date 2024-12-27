@@ -1,7 +1,7 @@
 CC = gcc
 CFLAGS = -Wall -Wextra -Werror
 
-SUBDIRS = linkedList binTree hashmap vector
+SUBDIRS = linkedList binTree hashmap vector string
 
 LIBRARIES = $(patsubst %, %/lib%.a, $(SUBDIRS))
 
