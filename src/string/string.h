@@ -14,10 +14,12 @@ struct String {
 String* create_string(const char* str);
 String* create_string_with_length(size_t len);
 
-void destroy_string(String* str);
+void delete_string(String* str);
 
 String* concat(const String* str1, const String* str2);
 int compare(const String* str1, const String* str2);
 String* append(String* str1, char * str2);
+
+void split(const String* str, const char* delim);
 
 #endif /* STRING_H */

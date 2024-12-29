@@ -1,12 +1,14 @@
 #include "string.h"
 
 #include <string.h>
+#include <stdio.h>
 
 static size_t get_len(size_t value)
 {
-    size_t tmp = value % 16;
-    return value + tmp + 32;
+    size_t tmp = (value + 15) & ~15;
+    return tmp + 32;
 }
+
 String* create_string(const char* str)
 {
     if (str == NULL)
@@ -55,7 +57,7 @@ String* create_string_with_length(size_t len)
     return new_str;
 }
 
-void destroy_string(String* str)
+void delete_string(String* str)
 {
     if (str != NULL)
     {
@@ -86,6 +88,7 @@ String* concat(const String* str1, const String* str2)
 
     return new_str;
 }
+
 int compare(const String* str1, const String* str2)
 {
     size_t len = str1->len - str2->len;
@@ -118,4 +121,12 @@ String* append(String* str1, char * str2)
     str1->len += len_str2;
 
     return str1;
+}
+
+void split(const String* str, const char* delim)
+{
+    char* res = calloc(str->len, sizeof(char));
+    // memcpy(res, str->str);
+    delim = delim;
+    res = res;
 }

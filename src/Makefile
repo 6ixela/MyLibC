@@ -3,13 +3,12 @@ CFLAGS = -Wall -Wextra -Werror
 
 SUBDIRS = linkedList binTree hashmap vector string
 
-LIBRARIES = $(patsubst %, %/lib%.a, $(SUBDIRS))
-
+OBJ = $(patsubst %, %/%.o, $(SUBDIRS))
 .PHONY: all clean
 
-all: $(LIBRARIES)
+all: $(OBJ)
 
-$(LIBRARIES):
+$(OBJ):
 	@for dir in $(SUBDIRS); do \
 		$(MAKE) -C $$dir all; \
 	done

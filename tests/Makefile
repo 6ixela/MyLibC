@@ -1,22 +1,28 @@
 CC = gcc
 CFLAGS = -Wall -Wextra -Werror -I../src
 
-LIBS = ../src/binTree/libbinTree.a ../src/hashmap/libhashmap.a \
-	   ../src/linkedList/liblinkedList.a ../src/vector/libvector.a
-TESTS = test_linkedList
+GREEN = \033[0;32m
+CYAN = \033[0;36m
+MAGENTA = \033[0;35m
+RESET = \033[0m
+
+OBJ = ../src/binTree/binTree.o ../src/hashmap/hashmap.o \
+	   ../src/linkedList/linkedList.o ../src/vector/vector.o \
+	   ../src/string/string.o
+TESTS = test_linkedList test_string
 
 TEST_SOURCES = $(patsubst %,%.c,$(TESTS))
 
 .PHONY: all clean check
 
-all: $(TESTS)
+all: $(TESTS) $(OBJ)
 
-%: %.c
-	$(CC) $(CFLAGS) -o $@ $< $(LIBS) -lcriterion
+%: %.c $(OBJ)
+	$(CC) $(CFLAGS) -o $@ $< $(OBJ) -lcriterion
 
-check: all
+check: all $(OBJ)
 	@for test in $(TESTS); do \
-		echo "Running $$test..."; \
+		echo "$(MAGENTA)Running $$test$(RESET)"; \
 		./$$test; \
 	done
 

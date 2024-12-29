@@ -7,7 +7,7 @@ LIB = lib$(NAME).a
 
 .PHONY: all clean
 
-all: $(LIB)
+all: $(LIB) $(OBJ)
 
 $(LIB): $(OBJ)
 	ar rcs $@ $^
