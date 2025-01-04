@@ -10,7 +10,7 @@ SRC_DIR = src
 TEST_DIR = tests
 
 
-.PHONY: all clean check
+.PHONY: all clean check test
 
 all: $(OBJ)
 
@@ -21,6 +21,13 @@ check: $(OBJ)
 	@echo "Call Makefile test directory"
 	$(MAKE) -C $(TEST_DIR) check
 
+test: CFLAGS += -g -fsanitize=address
+test: LDFLAGS += -fsanitize=address
+test: $(OBJ) main.o
+	@echo "Create binary"
+	$(CC) $(LDFLAGS) $(CFLAGS) $^ -o $@
+
 clean:
 	$(MAKE) -C $(SRC_DIR) clean
 	$(MAKE) -C $(TEST_DIR) clean
+	$(RM) main.o test
