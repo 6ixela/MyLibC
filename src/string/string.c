@@ -85,7 +85,7 @@ String* concat(const String* str1, const String* str2)
 
     strcpy(new_str->str, str1->str);
     strcat(new_str->str, str2->str);
-
+    new_str->len = new_len;
     return new_str;
 }
 
@@ -99,7 +99,7 @@ int compare(const String* str1, const String* str2)
     return memcmp(str1->str, str2->str, str1->len);
 }
 
-String* append(String* str1, char * str2)
+String* append(String* str1, char* str2)
 {
     if (str1 == NULL || str2 == NULL)
     {

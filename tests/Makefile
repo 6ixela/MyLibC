@@ -1,5 +1,5 @@
 CC = gcc
-CFLAGS = -Wall -Wextra -Werror -I../src
+CFLAGS = -Wall -Wextra -Werror -I../src -g
 
 GREEN = \033[0;32m
 CYAN = \033[0;36m
