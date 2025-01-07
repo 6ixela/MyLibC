@@ -111,6 +111,7 @@ String* append(String* str1, char* str2)
     {
         size_t new_len = get_len(len_str2 + str1->len);
         str1->str = realloc(str1->str, new_len);
+        str1->allocated_len = new_len;
     }
 
     for (size_t i = 0; i < len_str2; i++)
