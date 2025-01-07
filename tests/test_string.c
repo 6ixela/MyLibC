@@ -63,7 +63,7 @@ Test(string, test_compare_false) {
     delete_string(str2);
 }
 
-Test(string, basic_append) {
+Test(string, test_basic_append) {
     String* str1 = create_string("Hello");
     char str2[] = " World";
     
@@ -77,7 +77,34 @@ Test(string, basic_append) {
     delete_string(result);
 }
 
-/* TODO:
- * - create big string to see if allocated len change.
- * - same for append
-*/
+Test(string, test_all_function) {
+    char str_base1[] = "aaaaaaaaaabbbbbbbbbbccccccccccddddddddddeeeeeeeeee";
+    String* str1 = create_string(str_base1);
+    cr_assert_not_null(str1, "create_string returned NULL");
+    cr_assert_eq(str1->allocated_len, 96, "Allocated length is incorrect for str1: %i", str1->allocated_len);
+    cr_assert_eq(str1->len, strlen(str_base1), "Len is not correct str1: %i", str1->len);
+
+
+    char str_base2[] = "ffffffffffgggggggggghhhhhhhhhhjjjjjjjjjjkkkkkkkkkkllllllllll";
+    String* str2 = create_string_with_length(4);
+    cr_assert_not_null(str2, "create_string_with_length returned NULL");
+    cr_assert_eq(str2->allocated_len, 48, "Allocated length is incorrect for str2: %i", str2->allocated_len);
+
+    str2 = append(str2, str_base2);
+    cr_assert_not_null(str2, "append returned NULL");
+    cr_assert_eq(str2->allocated_len, 96, "Allocated length is incorrect for str2: %i", str2->allocated_len);
+    cr_assert_eq(str2->len, strlen(str_base2), "Len is not correct str2: %i", str2->len);
+    
+    int cmp = compare(str1, str2);
+    cr_assert_neq(cmp, 0, "compare return 0");
+
+    String* result = concat(str1, str2);
+    cr_assert_not_null(result, "append returned NULL");
+    
+    cr_assert_eq(result->len, strlen(str_base1) + strlen(str_base2), "Len is not correct: %i", result->len);
+    cr_assert_eq(result->allocated_len, 144, "Allocated length is incorrect: %i", result->allocated_len);
+    
+    delete_string(str1);
+    delete_string(str2);
+    delete_string(result);
+}
