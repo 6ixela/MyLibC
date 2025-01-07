@@ -1,12 +1,13 @@
 CC = gcc
 CFLAGS = -Wall -Wextra -Werror
-SRC = vector.c
+NAME=vector
+SRC = $(NAME).c
 OBJ = $(SRC:.c=.o)
-LIB = libvector.a
+LIB = lib$(NAME).a
 
 .PHONY: all clean
 
-all: $(LIB)
+all: $(LIB) $(OBJ)
 
 $(LIB): $(OBJ)
 	ar rcs $@ $^

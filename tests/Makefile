@@ -9,7 +9,7 @@ RESET = \033[0m
 OBJ = ../src/binTree/binTree.o ../src/hashmap/hashmap.o \
 	   ../src/linkedList/linkedList.o ../src/vector/vector.o \
 	   ../src/string/string.o
-TESTS = test_linkedList test_string
+TESTS = test_linkedList test_string test_vector
 
 TEST_SOURCES = $(patsubst %,%.c,$(TESTS))
 
