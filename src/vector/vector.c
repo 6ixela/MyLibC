@@ -2,11 +2,12 @@
 
 #include <stdlib.h>
 
-void vector_init(vector *vec)
+void vector_init(vector *vec, free_function free_function)
 {
     vec->capacity = VECTOR_INIT_CAPACITY;
     vec->size = 0;
     vec->items = malloc(sizeof(void *) * vec->capacity);
+    vec->free_function = free_function;
 }
 
 static void vector_resize(vector *vec, int capacity)
@@ -64,10 +65,25 @@ void vector_delete(vector *vec, int index)
     }
 }
 
+void *vector_pop(vector *vec)
+{
+    int index = vec->size - 1;
+    void *data = vector_get(vec, index);
+    vector_delete(vec, index);
+    return data;
+}
+
 void vector_free(vector *vec)
 {
     if (vec->items != NULL)
     {
+        if (vec->free_function != NULL)
+        {
+            for (int i = 0; i < vec->size; i++)
+            {
+                vec->free_function(vec->items[i]);
+            }
+        }
         free(vec->items);
         vec->items = NULL;
     }
