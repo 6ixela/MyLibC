@@ -1,6 +1,6 @@
 CC = gcc
 CFLAGS = -Wall -Wextra -Werror
-NAME=vector
+NAME=string
 SRC = $(NAME).c
 OBJ = $(SRC:.c=.o)
 LIB = lib$(NAME).a

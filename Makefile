@@ -1,23 +1,33 @@
 CC = gcc
 CFLAGS = -Wall -Werror -Wextra -std=c99 -Isrc
 
-SUBDIRS = src/binTree src/hashmap src/linkedList src/vector
+SUBDIRS = src/binTree src/hashmap src/linkedList src/vector src/string
 
-LIBRARIES = src/binTree/libbinTree.a src/hashmap/libhashmap.a src/linkedList/liblinkedList.a src/vector/libvector.a
+OBJ = src/binTree/binTree.o src/hashmap/hashmap.o \
+			src/linkedList/linkedList.o src/vector/vector.o \
+			src/string/string.o
 SRC_DIR = src
 TEST_DIR = tests
 
 
-.PHONY: all clean check
+.PHONY: all clean check test
 
-all: $(LIBRARIES)
+all: $(OBJ)
 
-$(LIBRARIES):
+$(OBJ):
 	$(MAKE) -C src
 
-check: $(LIBRARIES)
+check: $(OBJ)
+	@echo "Call Makefile test directory"
 	$(MAKE) -C $(TEST_DIR) check
+
+test: CFLAGS += -g -fsanitize=address
+test: LDFLAGS += -fsanitize=address
+test: $(OBJ) main.o
+	@echo "Create binary"
+	$(CC) $(LDFLAGS) $(CFLAGS) $^ -o $@
 
 clean:
 	$(MAKE) -C $(SRC_DIR) clean
 	$(MAKE) -C $(TEST_DIR) clean
+	$(RM) main.o test
