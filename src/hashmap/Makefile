@@ -1,6 +1,6 @@
 CC = gcc
 CFLAGS = -Wall -Wextra -Werror
-SRC = hashmap.c
+SRC = hashmap.c hash.c
 OBJ = $(SRC:.c=.o)
 LIB = libhashmap.a
 
