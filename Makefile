@@ -5,7 +5,8 @@ SUBDIRS = src/binTree src/hashmap src/linkedList src/vector src/string
 
 OBJ = src/binTree/binTree.o src/hashmap/hashmap.o \
 			src/linkedList/linkedList.o src/vector/vector.o \
-			src/string/string.o
+			src/string/string.o \
+			src/hashmap/hash.o
 SRC_DIR = src
 TEST_DIR = tests
 
