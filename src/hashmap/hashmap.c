@@ -77,7 +77,7 @@ void hash_map_free(hash_map *hash_map)
     free(hash_map);
 }
 
-void hash_map_dump(hash_map *hash_map)
+void hash_map_print(hash_map *hash_map)
 {
     if (!hash_map || hash_map->size == 0)
         return;

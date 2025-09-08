@@ -20,7 +20,7 @@ hash_map *hash_map_init(size_t size);
 bool hash_map_insert(hash_map *hash_map, const char *key, char *value,
                      bool *updated);
 void hash_map_free(hash_map *hash_map);
-void hash_map_dump(hash_map *hash_map);
+void hash_map_print(hash_map *hash_map);
 const char *hash_map_get(const hash_map *hash_map, const char *key);
 bool hash_map_remove(hash_map *hash_map, const char *key);
 
