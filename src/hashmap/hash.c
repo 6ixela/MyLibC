@@ -2,12 +2,11 @@
 
 size_t hash(const char *key)
 {
-    size_t i = 0;
-    size_t hash = 0;
-
-    for (i = 0; key[i] != '\0'; ++i)
-        hash += key[i];
-    hash += i;
-
+    size_t hash = 5381;
+    int c;
+    while ((c = *key++))
+    {
+        hash = ((hash << 5) + hash) + c;
+    }
     return hash;
 }
